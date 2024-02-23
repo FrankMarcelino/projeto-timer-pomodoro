@@ -1,32 +1,38 @@
-// timer
-
-const btnStart = document.getElementById('btn-start')
-const hour = document.getElementById('hour')
-const minute = document.getElementById('minute')
-const second = document.getElementById('second')
-const timer = document.getElementById('timer')
+const btnStart = document.getElementById('btn-start');
 
 btnStart.addEventListener('click', () => {
-    let durationH =     (parseInt(hour.value)  * 60 * 60)
-    let durationM =     (parseInt(minute.value) * 60)   
-    let durationS =     (parseInt(second.value))
+  const hours = document.getElementById('hour');
+  const minutes = document.getElementById('minute');
+  const seconds = document.getElementById('second');
 
-    timer(duration, display)
-}
+  let duration = (parseInt(hours.value) * 60 * 60) + (parseInt(minutes.value) * 60) + parseInt(seconds.value);
+
+  display = document.getElementById('timer');
+  timer(duration, display);
+})
 
 const timer = (duration, display) => {
-    let timer = duration
-    let hours, minutem, seconds
+  let timer = duration;
+  let hours, minutes, seconds;
 
-    setInterval(() => {
-        durationH = Math.floor(timer / 3600)
-        durationM = Math.floor(timer % 3600 / 60)
-        durationS = Math.floor(timer % 60)
+  let interval = setInterval(() => {
+    hours = Math.floor((timer / 60) / 60);
+    minutes = Math.floor(timer / 60 - (hours * 60));
+    seconds = Math.floor(timer % 60);
 
-        hours = (durationH < 10) ? '0' + durationH : durationH
-        minutem = (durationM < 10) ? '0' + durationM : durationM
-        seconds = (durationS < 10) ? '0' + durationS : durationS
+    
 
-        display.innerHTML = 'ACABOU!!'
-    }, 1000);
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    display.innerHTML = `${hours}:${minutes}:${seconds}`;
+
+    timer -= 1;
+
+    if(timer < 0){
+      display.innerHTML = 'ACABOU!!!';
+      clearInterval(interval);
+    }
+  }, 1000);
 }
