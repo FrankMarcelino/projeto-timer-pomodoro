@@ -1,5 +1,7 @@
 const btnStart = document.getElementById('btn-start');
 
+console.log(btnStart);
+
 btnStart.addEventListener('click', () => {
   const hours = document.getElementById('hour');
   const minutes = document.getElementById('minute');
@@ -20,7 +22,7 @@ const timer = (duration, display) => {
     minutes = Math.floor(timer / 60 - (hours * 60));
     seconds = Math.floor(timer % 60);
 
-    
+  
 
     hours = hours < 10 ? '0' + hours : hours;
     minutes = minutes < 10 ? '0' + minutes : minutes;
